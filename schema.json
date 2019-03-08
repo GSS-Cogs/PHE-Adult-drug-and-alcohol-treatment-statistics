@@ -1,0 +1,78 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    {
+      "@language": "en"
+    }
+  ],
+  "tables": [
+    {
+      "url": "https://ons-opendata.github.io/ref_alcohol/codelists/basis-of-treatment.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    },
+    {
+      "url": "https://ons-opendata.github.io/ref_alcohol/codelists/substance-type.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    },
+    {
+      "url": "out/observations.csv",
+      "tableSchema": {
+        "columns": [
+          {
+            "titles": "Period",
+            "required": true,
+            "name": "period"
+          },
+          {
+            "titles": "Basis of treatment",
+            "required": true,
+            "name": "basis_of_treatment"
+          },
+          {
+            "titles": "Substance type",
+            "required": true,
+            "name": "substance_type"
+          },
+          {
+            "titles": "Measure Type",
+            "required": true,
+            "name": "measure_type"
+          },
+          {
+            "titles": "Value",
+            "required": true,
+            "name": "value"
+          },
+          {
+            "titles": "Unit",
+            "required": true,
+            "name": "unit"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "columnReference": "basis_of_treatment",
+            "reference": {
+              "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/basis-of-treatment.csv",
+              "columnReference": "notation"
+            }
+          },
+          {
+            "columnReference": "substance_type",
+            "reference": {
+              "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/substance-type.csv",
+              "columnReference": "notation"
+            }
+          }
+        ],
+        "primaryKey": [
+          "period",
+          "basis_of_treatment",
+          "substance_type",
+          "measure_type",
+          "unit"
+        ]
+      }
+    }
+  ]
+}
